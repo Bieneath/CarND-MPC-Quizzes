@@ -23,7 +23,9 @@ int main() {
   /**
    * TODO: fit a polynomial to the above x and y coordinates
    */
-  auto coeffs = ? ;
+  // polyfit方法在helpers.h中定义，如果求ax^2+bx+c=0，
+  // 返回值按照c、b、a的顺序。
+  auto coeffs = polyfit(ptsx, ptsy, 1);
 
   // NOTE: free feel to play around with these
   double x = -1;
@@ -33,11 +35,13 @@ int main() {
   /**
    * TODO: calculate the cross track error
    */
-  double cte = ? ;
+  // ployeval方法在helpers.h中定义，注意减法的方向
+  double cte = ployeval(coeffs, x) - y;
   /**
    * TODO: calculate the orientation error
    */
-  double epsi = ? ;
+  // 对直线公式求导，注意减法方向
+  double epsi = psi - atan(coeffs[1]);
 
   VectorXd state(6);
   state << x, y, psi, v, cte, epsi;
